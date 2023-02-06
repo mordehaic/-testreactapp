@@ -9,4 +9,4 @@ pipelines:
         script:
           - npm install
           - npm run build:dev
-          - git push https://heroku:932de3df-77a5-46b0-8525-41a3258f370a @git.heroku.com/auto-deployed-app,git HEAD
+          - git push https://heroku:932de3df-77a5-46b0-8525-41a3258f370a @git.heroku.com/auto-deployed-app,git HEAD:master

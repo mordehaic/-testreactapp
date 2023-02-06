@@ -1,0 +1,14 @@
+image: node:16
+
+pipelines:
+  branches:
+    # When code is pushed to the dev branch it is deployed automatically to the dev environment.
+    develop:
+      - step:
+          name: Build
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run build:dev
+            - git push https://heroku:932de3df-77a5-46b0-8525-41a3258f370a @git.heroku.com/auto-deployed-app,git HEAD

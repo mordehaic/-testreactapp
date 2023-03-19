@@ -15,6 +15,9 @@ dist/
 
 # Log files
 *.log
+npm-debug.log
+.DS_Store
+/*.env
 
 # Package files
 *.jar

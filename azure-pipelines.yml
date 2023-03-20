@@ -28,8 +28,8 @@ steps:
 # - bash: git checkout $(Build.SourceBranchName)
 #   displayName: 'git checkout' 
 
-- bash: git remote add heroku https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git
-  displayName: 'git remote add heroku'
+# - bash: git remote add heroku https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git
+#   displayName: 'git remote add heroku'
 
 - bash: git push -f https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git HEAD
 # git push heroku -f

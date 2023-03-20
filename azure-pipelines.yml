@@ -25,8 +25,12 @@ steps:
   inputs:
     PathtoPublish: build
 
-- bash: |
-   git checkout $(Build.SourceBranchName)
-   git remote add heroku https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git
-   git push heroku $(Build.SourceBranchName)
-  displayName: 'Heroku Bash Script'    
+- bash: git checkout $(Build.SourceBranchName)
+  displayName: 'git checkout' 
+
+- bash: git remote add heroku https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git
+  displayName: 'git remote add heroku'
+
+- bash: git push heroku $(Build.SourceBranchName)
+  displayName: 'git push heroku' 
+

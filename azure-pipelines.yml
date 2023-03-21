@@ -8,7 +8,7 @@ trigger:
 
 variables:
 - name: npm_cache_directory           
-  value: $(Pipeline.Workspace)
+  value: $(Pipeline.Workspace)/.npm
 - name: NPM_CACHE_RESTORED           
   value: 'false'
 

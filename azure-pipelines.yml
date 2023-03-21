@@ -32,6 +32,9 @@ stages:
           - script: echo $(Build.SourcesDirectory)
             displayName: 'echo $(Build.SourcesDirectory)'  
             
+          - script: echo variables.NPM_CACHE_RESTORED
+            displayName: Display NPM_CACHE_RESTORED value 
+          
           - script: echo 'NPM_CACHE_RESTORED = false'
             displayName: 'NPM_CACHE_RESTORED = false'
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')

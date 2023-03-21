@@ -32,6 +32,14 @@ stages:
           - script: echo $(Build.SourcesDirectory)
             displayName: 'echo $(Build.SourcesDirectory)'  
             
+          - script: echo 'NPM_CACHE_RESTORED = false'
+            displayName: 'NPM_CACHE_RESTORED = false'
+            condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+          - script: echo 'NPM_CACHE_RESTORED = true'
+            displayName: 'echo NPM_CACHE_RESTORED = true'
+            condition: ne(variables.NPM_CACHE_RESTORED, 'false')  
+
           - task: Cache@2
             displayName: Cache npm
             inputs:
@@ -41,6 +49,7 @@ stages:
                 npm | "$(Agent.OS)"
               cacheHitVar: NPM_CACHE_RESTORED
 
+          
           - script: echo 'NPM_CACHE_RESTORED = true'
             displayName: 'echo NPM_CACHE_RESTORED = true'
             condition: ne(variables.NPM_CACHE_RESTORED, 'false')

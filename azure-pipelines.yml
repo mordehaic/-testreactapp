@@ -43,7 +43,7 @@ stages:
 
           - script: echo 'NPM_CACHE_RESTORED = true'
             displayName: 'echo NPM_CACHE_RESTORED = true'
-            condition: eq(variables.NPM_CACHE_RESTORED, 'true')
+            condition: ne(variables.NPM_CACHE_RESTORED, 'false')
 
           - script: echo 'NPM_CACHE_RESTORED = false'
             displayName: 'NPM_CACHE_RESTORED = false'

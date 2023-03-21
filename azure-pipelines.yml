@@ -6,41 +6,70 @@
 trigger:
 - master
 
+variables:
+- name: npm_cache_directory           
+  value: $(Pipeline.Workspace)
+- name: NPM_CACHE_RESTORED           
+  value: 'false'
+
+
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x'
-  displayName: 'Install Node.js'
+stages:
+  - stage: BuildArtifact
+    jobs:
+      - job: BuildArtifact
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "18.x"
+              checkLatest: true
+          
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package-lock.json'
+              path: $(npm_cache_directory)
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              cacheHitVar: NPM_CACHE_RESTORED
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'node_modules | "$(Agent.OS)" | $(Build.SourcesDirectory)/package-lock.json'
+              path: '$(Build.SourcesDirectory)/node_modules'
+              cacheHitVar: MODULES_CACHE_RESTORED
+          
+          # Didn’t work the first time, we got the error message:
+          ##[warning]Couldn't find a debug log in the cache or working directory 
+          ##[error]Error: Npm failed with return code: 1 
+          #- task: Npm@1
+          #  displayName: Yarn Install
+          #  inputs:
+          #    command: 'custom'
+          #    customCommand: 'yarn install'
+          #    workingDir: '$(Build.SourcesDirectory)/'
+          #  condition: ne(variables.MODULES_CACHE_RESTORED, 'true')
+          - script: npm install
+            workingDirectory: '$(Build.SourcesDirectory)/'
+            displayName: "Install npm packages"
+            condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: build
-
-# - bash: heroku login
-#   displayName: "Connect Heroku"
+          - bash: npm run build
+            displayName: Build optimize application
 
 
 
-# - bash: git checkout $(Build.SourceBranchName)
-#   displayName: 'git checkout' 
+          # - bash: git checkout $(Build.SourceBranchName)
+          #   displayName: 'git checkout' 
 
-- bash: git remote add heroku https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git
-  displayName: 'git remote add heroku'
+          # - bash: git remote add heroku https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git
+          #   displayName: 'git remote add heroku'
 
-# - bash: git push -f https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git HEAD
-# # git push heroku -f
-# # $(Build.SourceBranchName)
-#   displayName: 'git push heroku' 
-
-- bash: git push heroku main
-  displayName: "git push heroku"  
+          # - bash: git push -f https://heroku:$(heroku_token)@git.heroku.com/powerful-brook-60339.git HEAD
+          # # git push heroku -f
+          # # $(Build.SourceBranchName)
+          #   displayName: 'git push heroku' 
 

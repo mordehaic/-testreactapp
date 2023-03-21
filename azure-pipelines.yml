@@ -32,7 +32,7 @@ stages:
           - script: echo $(Build.SourcesDirectory)
             displayName: 'echo $(Build.SourcesDirectory)'  
             
-          - script: echo $(variables.NPM_CACHE_RESTORED)
+          - script: echo (variables.NPM_CACHE_RESTORED)
             displayName: Display NPM_CACHE_RESTORED value 
           
           - script: echo 'NPM_CACHE_RESTORED = false'

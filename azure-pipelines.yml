@@ -26,6 +26,12 @@ stages:
               versionSpec: "18.x"
               checkLatest: true
           
+          - script: echo $(Pipeline.Workspace)
+            displayName: 'echo $(Pipeline.Workspace)'
+
+          - script: echo $(Build.SourcesDirectory)
+            displayName: 'echo $(Build.SourcesDirectory)'  
+            
           - task: Cache@2
             displayName: Cache npm
             inputs:

@@ -41,6 +41,9 @@ stages:
                 npm | "$(Agent.OS)"
               cacheHitVar: NPM_CACHE_RESTORED
 
+          - script: echo NPM_CACHE_RESTORED
+            displayName: 'echo NPM_CACHE_RESTORED'    
+
           # - task: Cache@2
           #   displayName: Cache node_modules
           #   inputs:

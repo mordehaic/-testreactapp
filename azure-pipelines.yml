@@ -8,7 +8,7 @@ trigger:
 
 variables:
 - name: npm_cache_directory           
-  value: $(Pipeline.Workspace)/.npm
+  value: $(Pipeline.Workspace)/.npm   # (Build.SourcesDirectory)=(Pipeline.Workspace)
 - name: NPM_CACHE_RESTORED           
   value: 'false'
 
@@ -26,22 +26,9 @@ stages:
               versionSpec: "18.x"
               checkLatest: true
           
-          - script: echo $(Pipeline.Workspace)
-            displayName: 'echo $(Pipeline.Workspace)'
-
-          - script: echo $(Build.SourcesDirectory)
-            displayName: 'echo $(Build.SourcesDirectory)'  
-            
-          - script: echo (variables.NPM_CACHE_RESTORED)
-            displayName: Display NPM_CACHE_RESTORED value 
-          
           - script: echo 'NPM_CACHE_RESTORED = false'
             displayName: 'NPM_CACHE_RESTORED = false'
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-          - script: echo 'NPM_CACHE_RESTORED = true'
-            displayName: 'echo NPM_CACHE_RESTORED = true'
-            condition: ne(variables.NPM_CACHE_RESTORED, 'false')  
 
           - task: Cache@2
             displayName: Cache npm
@@ -51,11 +38,6 @@ stages:
               restoreKeys: |
                 npm | "$(Agent.OS)"
               cacheHitVar: NPM_CACHE_RESTORED
-
-          
-          - script: echo 'NPM_CACHE_RESTORED = true'
-            displayName: 'NPM_CACHE_RESTORED = true'
-            condition: ne(variables.NPM_CACHE_RESTORED, 'false')
 
           - script: echo 'NPM_CACHE_RESTORED = false'
             displayName: 'NPM_CACHE_RESTORED = false'
@@ -97,4 +79,3 @@ stages:
           # # git push heroku -f
           # # $(Build.SourceBranchName)
           #   displayName: 'git push heroku' 
-

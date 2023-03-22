@@ -37,9 +37,6 @@ stages:
 
           - script: npm config ls -l
             displayName: 'npm config ls -l list'  
-
-          - script: find / -type d -name ".npm" 2>/dev/null
-            displayName: 'Search the .npm directory'
           
           - script: pwd
             displayName: 'Current working directory' 

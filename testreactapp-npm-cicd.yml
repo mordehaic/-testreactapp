@@ -31,16 +31,16 @@ stages:
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
           - script: ls
-            displayName: 'Directories list'
-
-          - script: ls ..$(Pipeline.Workspace)
-            displayName: '(Pipeline.Workspace) list'  
+            displayName: 'Directories list'  
 
           - script: pwd
             displayName: 'Current working directory' 
 
           - script: pwd | ls
-            displayName: 'List files in current working directory' 
+            displayName: 'List files in current working directory'
+
+          - script: ls ..$(Pipeline.Workspace)
+            displayName: '(Pipeline.Workspace) list'  
 
           - task: Cache@2
             displayName: Cache npm

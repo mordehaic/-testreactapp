@@ -28,7 +28,10 @@ stages:
           
           - script: echo 'NPM_CACHE_RESTORED = false'
             displayName: 'NPM_CACHE_RESTORED value'
-            condition: ne(variables.NPM_CACHE_RESTORED, 'true') 
+            condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+          - script: ls
+            displayName: 'Directories list'
 
           - task: Cache@2
             displayName: Cache npm

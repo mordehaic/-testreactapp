@@ -1,12 +1,12 @@
-image: node:16
+# image: node:16
 
-pipelines:
-  default:
-    - step:
-        name: Build
-        caches:
-          - node
-        script:
-          - npm install
-          - npm run build
-          - git push -f https://heroku:932de3df-77a5-46b0-8525-41a3258f370a@git.heroku.com/auto-deployed-app,git HEAD
+# pipelines:
+#   default:
+#     - step:
+#         name: Build
+#         caches:
+#           - node
+#         script:
+#           - npm install
+#           - npm run build
+#           - git push -f https://heroku:932de3df-77a5-46b0-8525-41a3258f370a@git.heroku.com/auto-deployed-app,git HEAD

@@ -8,7 +8,7 @@ trigger:
 
 variables:
 - name: npm_cache_directory           
-  value: $(Pipeline.Workspace)/.npm   # (Build.SourcesDirectory)=(Pipeline.Workspace)
+  value: $(Pipeline.Workspace)   # (Build.SourcesDirectory)=(Pipeline.Workspace)
 - name: NPM_CACHE_RESTORED           
   value: 'false'
 
@@ -37,10 +37,7 @@ stages:
             displayName: 'Current working directory' 
 
           - script: pwd | ls
-            displayName: 'List files in current working directory'
-
-          - script: ls ..$(Pipeline.Workspace)
-            displayName: '(Pipeline.Workspace) list'  
+            displayName: 'List files in current working directory' 
 
           - task: Cache@2
             displayName: Cache npm

@@ -9,7 +9,8 @@ trigger:
 variables:
 - name: npm_cache_directory           
   #value: $(Pipeline.Workspace)/node_modules   # (Build.SourcesDirectory)=(Pipeline.Workspace)
-  value: "/home/vsts/.npm"
+  value: "/home/vsts/.npm"  # $(Pipeline.Workspace) = /home/vsts/work/1/s
+
 - name: NPM_CACHE_RESTORED           
   value: 'false'
 

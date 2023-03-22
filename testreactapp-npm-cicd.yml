@@ -33,7 +33,7 @@ stages:
           - script: ls
             displayName: 'Directories list'
 
-          - script: ls $(Pipeline.Workspace)/
+          - script: ls ../$(Pipeline.Workspace)
             displayName: '(Pipeline.Workspace) list'  
 
           - script: pwd

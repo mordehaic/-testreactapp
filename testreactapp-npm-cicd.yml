@@ -26,9 +26,9 @@ stages:
               versionSpec: "18.x"
               checkLatest: true
           
-          - script: echo 'NODE_MODULES_CACHE_RESTORE = false'
-            displayName: 'NODE_MODULES_CACHE_RESTORE value'
-            condition: ne(variables.NODE_MODULES_CACHE_RESTORE, 'true') 
+          - script: echo 'NPM_CACHE_RESTORED = false'
+            displayName: 'NPM_CACHE_RESTORED value'
+            condition: ne(variables.NPM_CACHE_RESTORED, 'true') 
 
           - task: Cache@2
             displayName: Cache npm
@@ -39,9 +39,9 @@ stages:
                 npm | "$(Agent.OS)"
               cacheHitVar: NPM_CACHE_RESTORED
 
-          - script: echo 'NODE_MODULES_CACHE_RESTORE = true'
-            displayName: 'NODE_MODULES_CACHE_RESTORE value'
-            condition: eq(variables.NODE_MODULES_CACHE_RESTORE, 'true')      
+          - script: echo 'NPM_CACHE_RESTORED = true'
+            displayName: 'NPM_CACHE_RESTORED value'
+            condition: eq(variables.NPM_CACHE_RESTORED, 'true')      
 
           - script: npm install
             workingDirectory: '$(Build.SourcesDirectory)/'

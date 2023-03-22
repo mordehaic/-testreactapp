@@ -42,7 +42,7 @@ stages:
           - task: Cache@2
             displayName: Cache npm
             inputs:
-              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package-lock.json'
               path: $(npm_cache_directory)
               restoreKeys: |
                 npm | "$(Agent.OS)"

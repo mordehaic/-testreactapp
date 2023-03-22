@@ -30,7 +30,7 @@ stages:
             displayName: 'NPM_CACHE_RESTORED value'
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
-          - script: ls -la
+          - script: npm config ls -l
             displayName: 'Directories list'  
 
           - script: pwd

@@ -33,6 +33,9 @@ stages:
           - script: ls
             displayName: 'Directories list'
 
+          - script: ls $(Pipeline.Workspace)
+            displayName: '(Pipeline.Workspace) list'  
+
           - task: Cache@2
             displayName: Cache npm
             inputs:

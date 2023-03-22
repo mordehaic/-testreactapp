@@ -30,7 +30,7 @@ stages:
             displayName: 'NPM_CACHE_RESTORED value'
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
-          - script: ls
+          - script: ls -la
             displayName: 'Directories list'  
 
           - script: pwd

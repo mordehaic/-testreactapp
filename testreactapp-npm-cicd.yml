@@ -26,9 +26,9 @@ stages:
               versionSpec: "18.x"
               checkLatest: true
           
-          - script: echo 'NPM_CACHE_RESTORED = false'
-            displayName: 'NPM_CACHE_RESTORED = false'
-            condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+          - script: echo 'NODE_MODULES_CACHE_RESTORE = false'
+            displayName: 'NODE_MODULES_CACHE_RESTORE value'
+            condition: ne(variables.NODE_MODULES_CACHE_RESTORE, 'true') 
 
           - task: Cache@2
             displayName: Cache npm
@@ -39,27 +39,10 @@ stages:
                 npm | "$(Agent.OS)"
               cacheHitVar: NPM_CACHE_RESTORED
 
-          - script: echo 'NPM_CACHE_RESTORED = false'
-            displayName: 'NPM_CACHE_RESTORED = false'
-            condition: ne(variables.NPM_CACHE_RESTORED, 'true')      
+          - script: echo 'NODE_MODULES_CACHE_RESTORE = true'
+            displayName: 'NODE_MODULES_CACHE_RESTORE value'
+            condition: eq(variables.NODE_MODULES_CACHE_RESTORE, 'true')      
 
-          # - task: Cache@2
-          #   displayName: Cache node_modules
-          #   inputs:
-          #     key: 'node_modules | "$(Agent.OS)" | $(Build.SourcesDirectory)/package-lock.json'
-          #     path: '$(Build.SourcesDirectory)/node_modules'
-          #     cacheHitVar: MODULES_CACHE_RESTORED
-          
-          # Didn’t work the first time, we got the error message:
-          ##[warning]Couldn't find a debug log in the cache or working directory 
-          ##[error]Error: Npm failed with return code: 1 
-          #- task: Npm@1
-          #  displayName: Yarn Install
-          #  inputs:
-          #    command: 'custom'
-          #    customCommand: 'yarn install'
-          #    workingDir: '$(Build.SourcesDirectory)/'
-          #  condition: ne(variables.MODULES_CACHE_RESTORED, 'true')
           - script: npm install
             workingDirectory: '$(Build.SourcesDirectory)/'
             displayName: "Install npm packages"

@@ -41,7 +41,7 @@ stages:
           - script: pwd
             displayName: 'Current working directory' 
 
-          - script: pwd | ls
+          - script: pwd | ls -la
             displayName: 'List files in current working directory' 
 
           - task: Cache@2
@@ -68,7 +68,7 @@ stages:
           - script: pwd
             displayName: 'Current working directory' 
 
-          - script: pwd | ls
+          - script: pwd | ls -la
             displayName: 'List files in current working directory'
 
           - task: Cache@2

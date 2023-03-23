@@ -65,8 +65,29 @@ stages:
           - bash: npm run build
             displayName: Build optimize application
 
+          - script: pwd
+            displayName: 'Current working directory' 
+
           - script: pwd | ls
             displayName: 'List files in current working directory'
+
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: '"npm" | "$(Agent.OS)" | package-lock.json'
+              path: $(npm_cache_directory)
+              restoreKeys: |
+                "npm" | "$(Agent.OS)"
+              cacheHitVar: NPM_CACHE_RESTORED
+
+          - script: echo 'NPM_CACHE_RESTORED = true'
+            displayName: 'NPM_CACHE_RESTORED value'
+            condition: eq(variables.NPM_CACHE_RESTORED, 'true')      
+
+          - script: npm install
+            workingDirectory: '$(Build.SourcesDirectory)/'
+            displayName: "Install npm packages"
+            condition: ne(variables.NPM_CACHE_RESTORED, 'true')  
 
           # - bash: git checkout $(Build.SourceBranchName)
           #   displayName: 'git checkout' 

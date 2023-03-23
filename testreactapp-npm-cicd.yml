@@ -44,6 +44,9 @@ stages:
           - script: pwd | ls -la
             displayName: 'List files in current working directory' 
 
+          - script: ls -la /opt/hostedtoolcache/node/18.15.0/x64/etc/
+            displayName: 'List files in /opt/hostedtoolcache/node/18.15.0/x64/etc/ directory' 
+
           - task: Cache@2
             displayName: Cache npm
             inputs:

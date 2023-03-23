@@ -61,14 +61,13 @@ stages:
             workingDirectory: '$(Build.SourcesDirectory)/'
             displayName: "Install npm packages"
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-          - script: pwd | ls
-            displayName: 'List files in current working directory'
           
           - bash: npm run build
             displayName: Build optimize application
 
-
+          - script: pwd | ls
+            displayName: 'List files in current working directory'
+            
           # - bash: git checkout $(Build.SourceBranchName)
           #   displayName: 'git checkout' 
 

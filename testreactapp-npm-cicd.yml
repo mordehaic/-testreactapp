@@ -74,7 +74,7 @@ stages:
           - task: Cache@2
             displayName: Cache npm
             inputs:
-              key: '"npm" | "$(Agent.OS)" | package-lock.json'
+              key: '"npm" | "$(Agent.OS)" | package.json'
               path: $(npm_cache_directory)
               restoreKeys: |
                 "npm" | "$(Agent.OS)"
@@ -85,7 +85,7 @@ stages:
             condition: eq(variables.NPM_CACHE_RESTORED, 'true')      
 
           - script: npm install
-            workingDirectory: '$(Build.SourcesDirectory)/'
+            workingDirectory: '$(Build.SourcesDirectory)'
             displayName: "Install npm packages"
             condition: ne(variables.NPM_CACHE_RESTORED, 'true')  
 

@@ -74,6 +74,10 @@ stages:
           - script: pwd | ls -la $(Pipeline.Workspace)/.npm
             displayName: 'List files in Pipeline.Workspace/.npm directory'
           
+          - script: pwd | ls -la /home/vsts/.npm
+            displayName: 'List files in /home/vsts/.npm directory'
+          
+          
           - task: Cache@2
             displayName: Cache npm
             inputs:

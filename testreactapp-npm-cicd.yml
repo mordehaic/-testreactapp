@@ -44,9 +44,6 @@ stages:
           - script: pwd | ls -la
             displayName: 'List files in current working directory' 
 
-          - script: cd /opt/hostedtoolcache/node/18.15.0/x64/etc && ls -la
-            displayName: 'List files in /opt/hostedtoolcache/node/18.15.0/x64/etc/ directory' 
-
           - task: Cache@2
             displayName: Cache npm
             inputs:
@@ -79,9 +76,6 @@ stages:
           
           - script: pwd | ls -la /home/vsts/.npm
             displayName: 'List files in /home/vsts/.npm directory'
-          
-          - script: pwd | ls -la /home/vsts/.npm/_cacache
-            displayName: 'List files in /home/vsts/.npm/_cacache directory'
 
           - task: Cache@2
             displayName: Cache npm

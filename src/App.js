@@ -16,7 +16,10 @@ function App() {
           rel="noopener noreferrer"
         >
           Welcome to Balink
+          <br/>
           Hag Pessah Casher veSameah
+          <br/>
+          Hag Pessah Hag haemouna
 
         </a>
         <>

@@ -17,11 +17,10 @@ function App() {
         >
           Welcome to Balink
           <br/>
+
           Hag Pessah Casher veSameah
           <br/>
           Hag Pessah Hag haemouna
-          <br/>
-          We have to eat matsa
 
         </a>
         <>
